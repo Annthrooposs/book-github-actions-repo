@@ -1,0 +1,26 @@
+# This is a basic workflow to help you get started with Actions
+
+name: "Jobs - Exercise 03"
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  job1:
+    name: "Premier job"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Job1 - commande 1"
+        run: echo "hello job2" > test.txt # écrit dans test.txt
+      
+  job2:
+    name: "Second job"
+    needs: job1
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name : "Second job - Commande 1"
+        run: cat test.txt # lit le contnu de ce même fichier test.txt et l'affiche dans la console
