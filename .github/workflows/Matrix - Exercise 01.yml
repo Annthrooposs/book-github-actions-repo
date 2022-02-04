@@ -13,16 +13,19 @@ jobs:
   build:
     strategy:
       matrix:
-        xxxxxxxxxxxxxxxxxxxxx
-  steps:
+        dotnet: [4.2.x, 5.0.x]
+        buildMode: [Debug, Release]
+    runs-on: window-latest
+    steps:
     - name: Récupère le code source
       uses: action/checkout@v2
     - name: Install .NET
       uses: action/setup-dotnet@v1
       with:
-        dotnet-version: xxxxxxxxxxxxxxxxxxxxx
+        dotnet-version: ${{matrix.dotnet}} # récupération de la variable dotnet de notre matrice
     - name: Restore-dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no restore --configuration ${{env.buildmode}}
-      env: buildmode: xxxxxxxxxxxxxxxxxxxxx
+      run: dotnet build --no restore --configuration ${{env.buildMode}}
+      env:
+        buildmode: ${{matrix.buildMode}}
