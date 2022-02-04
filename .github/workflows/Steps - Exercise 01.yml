@@ -10,7 +10,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  message:
     runs-on: ubuntu-latest
     steps:
     - uses: phwes/simple_hello_world@v1
