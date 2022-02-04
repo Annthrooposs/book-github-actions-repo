@@ -14,3 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: phwes/simple_hello_world@v1
+    - uses: lgmorand/github-action-hello@v2
+      with:
+        firstname: Jean-Charles
