@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Environments - Exercise 01
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  job1:
+    name: Dev
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo DEV
+    
+  job2:
+    name: Testing
+    needs: job1
+    runs-on: ubuntu-latest
+    environment:
+      name: TESTING
+    steps:
+      - run: echo test
+      
+  job3:
+    name: Loading Testing
+    needs: job1
+    runs-on: ubuntu-latest
+    environment:
+      name: LOADTESTING
+    steps:
+        - run: echo job3
+        
+  job4:
+    name: prod
+    needs: [job2, job3]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Prod
